@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/add-base-url: /jenkins
+
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - backend:
+          serviceName: jenkins-service
+          servicePort: 80
+        path: /jenkins
