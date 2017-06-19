@@ -11,7 +11,7 @@ spec:
         app: master
     spec:
       nodeSelector:
-        kubernetes.io/hostname: ubuntu-server
+        dedicated: master
       containers:
       - name: master
         image: qflow/jenkins-docker:latest
@@ -20,13 +20,15 @@ spec:
         - containerPort: 50000
         readinessProbe:
           httpGet:
-            path: /login
+            path: /jenkins/login
             port: 8080
           periodSeconds: 10
           timeoutSeconds: 5
           successThreshold: 2
           failureThreshold: 5
         env:
+          - name: JENKINS_OPTS
+            value: "--prefix=/jenkins"
         volumeMounts:
         - mountPath: /var/run/docker.sock
           name: var-run-docker-sock
@@ -60,7 +62,6 @@ metadata:
   name: jenkins-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    ingress.kubernetes.io/add-base-url: /jenkins
 
 spec:
   rules:
