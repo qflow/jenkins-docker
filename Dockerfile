@@ -1,4 +1,4 @@
-FROM jenkins:2.89.3
+FROM jenkins
 MAINTAINER Michal Fojtak <mfojtak@seznam.cz>
 
 USER root
