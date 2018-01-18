@@ -1,4 +1,4 @@
-FROM jenkins:lts
+FROM jenkins/jenkins:lts
 MAINTAINER Michal Fojtak <mfojtak@seznam.cz>
 
 USER root
